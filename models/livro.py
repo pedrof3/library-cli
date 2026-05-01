@@ -9,8 +9,20 @@ class Book:
         self.id = str(uuid4())[:8]
         self.available = True
         
-    def to_dict(self):
-        pass
+    def to_dict(self) -> dict:
+        return {
+            "título": self.title,
+            "autor": self.author,
+            "língua": self.language,
+            "id": self.id,
+            "disponível": self.available
+        }
     
-    def from_dict(self):
-        pass
+    def from_dict(self, data: dict):
+        return self(
+            title=data["título"],
+            author=data["autor"],
+            language=data["língua"],
+            id=data["id"],
+            available=data["disponível"]
+        )
