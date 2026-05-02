@@ -2,31 +2,74 @@ import json
 import pathlib
 
 PATH_NAME = pathlib.Path() / "database"
-FILE_NAME = PATH_NAME / "database.json"
+BOOKS_FILE = PATH_NAME / "books.json"
+LOANS_FILE = PATH_NAME / "loans.json"
+USERS_FILE = PATH_NAME / "users.json"
 
 class JsonDB:
     
     def __init__(self):
         self.path_name = PATH_NAME
-        self.file_name = FILE_NAME
-    
-    def save_data(self, data: dict) -> None:
+        self.books_file = BOOKS_FILE
+        self.loans_file = LOANS_FILE
+        self.users_file = USERS_FILE
+
+    def save_book(self, data:dict) -> None:
         try:
-            with open(self.file_name, "w", encoding="utf-8") as f:
+            with open(self.books_file, "w", encoding="utf-8") as f:
                 json.dump(data, f, indent=4)
         except:
             pass
-    
-    def load_data(self) -> dict:
-        if not self.file_name.exists():
+
+    def load_book(self) -> list[dict]:
+        if not self.books_file.exists():
             self.path_name.mkdir(parents=True, exist_ok=True)
-            self.file_name.touch(exist_ok=True)
-            return self.save_data({"livros": {}, "usuários": {}, "empréstimos": {}})
+            self.books_file.touch(exist_ok=True)
+            return self.save_book([])
         
         try:
-            with open(self.file_name, "r", encoding="utf-8") as f:
+            with open(self.books_file, "r", encoding="utf-8") as f:
                 return json.load(f)
             
         except FileNotFoundError:
-            return self.save_data({"livros": {}, "usuários": {}, "empréstimos": {}})
+            return self.save_book([])
+    
+    def save_loan(self, data:dict) -> None:
+        try:
+            with open(self.loans_file_file, "w", encoding="utf-8") as f:
+                json.dump(data, f, indent=4)
+        except:
+            pass
+
+    def load_loan(self) -> list[dict]:
+        if not self.loans_file.exists():
+            self.path_name.mkdir(parents=True, exist_ok=True)
+            self.loans_file.touch(exist_ok=True)
+            return self.save_loan([])
         
+        try:
+            with open(self.loans_file, "r", encoding="utf-8") as f:
+                return json.load(f)
+            
+        except FileNotFoundError:
+            return self.save_loans([])
+
+    def save_user(self, data:dict) -> None:
+        try:
+            with open(self.users_file, "w", encoding="utf-8") as f:
+                json.dump(data, f, indent=4)
+        except:
+            pass
+
+    def load_user(self) -> list[dict]:
+        if not self.users_file.exists():
+            self.path_name.mkdir(parents=True, exist_ok=True)
+            self.users_file.touch(exist_ok=True)
+            return self.save_book([])
+        
+        try:
+            with open(self.users_file, "r", encoding="utf-8") as f:
+                return json.load(f)
+            
+        except FileNotFoundError:
+            return self.save_user([])

@@ -1,2 +1,4 @@
 guide.md
 /database/
+/__pycache__/
+/models/__pycache__/
