@@ -8,19 +8,48 @@ class Librabry:
     def __init__(self, data: JsonDB):
         self.data = JsonDB()
 
-        self.books = [Book.from_dict(x) for x in self.data.load_data()]
+        self.books = [x for x in self.data.load_book()]
+        self.loans = [y for y in self.data.load_loan()]
+        self.users = [z for z in self.data.load_user()]
     
     def add_book(self, book: Book) -> None:
-        self.books.append(book)
+        self.books.append(book.to_dict())
+        self.data.save_book(self.books)
     
-    def get_books(self):
-        pass
+    def get_books(self) -> str:
+        output = ""
+        for book in self.books:
+            output += f"ID: {book["id"]}, Livro: {book["titulo"]}, Autor: {book["autor"]}, Língua: {book["lingua"]}\n"
+
+        return output
     
-    def loan_book(self) -> bool:
-        pass
+    def loan_book(self, loan: Loan) -> bool:
+        if loan.user_id not in [z["id"] for z in self.users]:
+            return False
+        
+        if loan.book_id not in [x["id"] for x in self.books]:
+            return False
+        
+        for book in self.books:
+            if book["id"] == loan.book_id:
+                if book["disponivel"] == False:
+                    return False
+                else:
+                    book["disponivel"] = False
+                    self.data.save_book(self.books)
+        
+        self.loans.append(loan.to_dict())
+        self.data.save_loan(self.loans)
+
+        return True
     
     def add_user(self, user: User) -> None:
-        pass
+        self.users.append(user.to_dict())
+        self.data.save_user(self.users)
     
-    def get_users(self):
-        pass
+    def get_users(self) -> str:
+        output = ""
+        for user in self.users:
+            output += f"ID: {user["id"]}, Nome: {user["nome"]}, Sobrenome: {user["sobrenome"]}\n"
+
+        return output

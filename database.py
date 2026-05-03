@@ -25,7 +25,8 @@ class JsonDB:
         if not self.books_file.exists():
             self.path_name.mkdir(parents=True, exist_ok=True)
             self.books_file.touch(exist_ok=True)
-            return self.save_book([])
+            self.save_book([])
+            return []
         
         try:
             with open(self.books_file, "r", encoding="utf-8") as f:
@@ -36,7 +37,7 @@ class JsonDB:
     
     def save_loan(self, data:dict) -> None:
         try:
-            with open(self.loans_file_file, "w", encoding="utf-8") as f:
+            with open(self.loans_file, "w", encoding="utf-8") as f:
                 json.dump(data, f, indent=4)
         except:
             pass
@@ -45,7 +46,8 @@ class JsonDB:
         if not self.loans_file.exists():
             self.path_name.mkdir(parents=True, exist_ok=True)
             self.loans_file.touch(exist_ok=True)
-            return self.save_loan([])
+            self.save_loan([])
+            return []
         
         try:
             with open(self.loans_file, "r", encoding="utf-8") as f:
@@ -65,7 +67,8 @@ class JsonDB:
         if not self.users_file.exists():
             self.path_name.mkdir(parents=True, exist_ok=True)
             self.users_file.touch(exist_ok=True)
-            return self.save_book([])
+            self.save_book([])
+            return []
         
         try:
             with open(self.users_file, "r", encoding="utf-8") as f:

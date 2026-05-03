@@ -11,18 +11,18 @@ class Book:
         
     def to_dict(self) -> dict:
         return {
-            "título": self.title,
+            "titulo": self.title,
             "autor": self.author,
-            "língua": self.language,
+            "lingua": self.language,
             "id": self.id,
-            "disponível": self.available
+            "disponivel": self.available
         }
     
     def from_dict(self, data: dict):
         return self(
-            title=data["título"],
+            title=data["titulo"],
             author=data["autor"],
-            language=data["língua"],
+            language=data["lingua"],
             id=data["id"],
-            available=data["disponível"]
+            available=data["disponivel"]
         )

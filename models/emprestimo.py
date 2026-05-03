@@ -12,16 +12,16 @@ class Loan:
     def to_dict(self) -> dict:
         return {
             "id livro": self.book_id,
-            "id usuário": self.user_id,
-            "id empréstiimo": self.id,
-            "data empréstimo": self.loan_date
+            "id usuario": self.user_id,
+            "id emprestiimo": self.id,
+            "data emprestimo": self.loan_date
         }
     
     def from_dict(self, data: dict):
         return self(
             book_id=data["id livro"],
-            user_id=data["id usuário"],
-            id=data["id empréstimo"],
-            loan_date=["data empréstimo"]
+            user_id=data["id usuario"],
+            id=data["id emprestimo"],
+            loan_date=["data emprestimo"]
         )
     
