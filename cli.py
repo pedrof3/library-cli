@@ -30,7 +30,7 @@ class Cli:
             elif command == "3":
                 self.loan_book()
             elif command == "4":
-                pass
+                self.return_book()
             elif command == "5":
                 self.get_books()
             elif command == "6":
@@ -68,6 +68,15 @@ class Cli:
             print("EMPRÉSTIMO REALIZADO COM SUCESSO.")
         else:
             print("O EMPRÉSTIMO NÃO PÔDE SER CONCLUÍDO.")
+
+    def return_book(self) -> None:
+        print("=== DEVOLVER LIVRO ===")
+        id_loan = input("ID do empréstimo: ")
+
+        if self.library.return_book(id_loan):
+            print("DEVOLUÇÃO FEITA COM SUCESSO.")
+        else:
+            print("A DEVOLUÇÃO NÃO FOI CONCLUÍDA")
 
     def get_books(self) -> None:
         print("=== LIVROS LISTADOS ===")

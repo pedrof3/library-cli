@@ -13,7 +13,7 @@ class Loan:
         return {
             "id livro": self.book_id,
             "id usuario": self.user_id,
-            "id emprestiimo": self.id,
+            "id emprestimo": self.id,
             "data emprestimo": self.loan_date
         }
     

@@ -43,6 +43,23 @@ class Librabry:
 
         return True
     
+    def return_book(self, id_loan) -> bool:
+        if id_loan not in [x["id emprestimo"] for x in self.loans]:
+            return False
+        
+        idx = 0
+        for loan in self.loans:
+            if loan["id emprestimo"] == id_loan:
+                for book in self.books:
+                    if book["id"] == loan["id livro"]:
+                        book["disponivel"] = True
+                        self.data.save_book(self.books)
+                break
+            idx += 1
+
+        del self.loans[idx]
+        self.data.save_loan(self.loans)
+    
     def add_user(self, user: User) -> None:
         self.users.append(user.to_dict())
         self.data.save_user(self.users)
